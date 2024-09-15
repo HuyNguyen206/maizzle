@@ -1,0 +1,50 @@
+---
+title: "Invoice approval digest"
+bodyClass: "bg-amber-500"
+---
+
+<push name="head">
+<!--  <outlook only="2013,2016">-->
+  <outlook only="2013,2016">
+    <style>
+      .font-public-sans {
+        font-family: sans-serif !important;
+      }
+    </style>
+  </outlook>
+
+  <not-outlook>
+ cx
+  </not-outlook>
+  <style>
+    @font-face {
+      font-family: "Public Sans";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(https://fonts.cdnfonts.com/css/public-sans);
+      unicode-range: U+0000-00F, U+0131, U+0152-0153;
+    }
+  </style>
+</push>
+<x-layout>
+  <x-notification bgColor="bg-amber-900">
+    <div class="text-left font-public-sans">
+      <fetch url="http://ticket-support.test/api/v1/maizzle-response">
+        <each loop="invoice in response">
+          <h5>
+            {{invoice.vendor}}: {{invoice.amount}}
+          </h5>
+          <div class="pb-2">
+            <p>{{invoice.description}}</p>
+            <ul>
+              <li>Invoice date: {{invoice.invoiceDate}}</li>
+              <li>Approval date: {{invoice.approvalDate}}</li>
+            </ul>
+          </div>
+        </each>
+      </fetch>
+    </div>
+
+  </x-notification>
+</x-layout>
